@@ -36,17 +36,8 @@ class Person():
         return 'updated name.'
 
         # to use: >>> michd.set_name_change(**{'first_name':'Michelle', 'last_name':'Dicks'})
-        # CAREFUL - when spelling keys 
-        """
-        >>> michd.set_name_change(**{'first_Name': 'Michelle'})
-        updated name.
-        >>> michd.first_name
-        'Michaelle'
-        >>> michd.set_name_change(**{'first_name': 'Michelle'})
-        updated name.
-        >>> michd.first_name
-        'Michelle'
-        """
+        # or for one key >>> michd.set_name_change(**{'first_Name': 'Michelle'})
+        # CAREFUL - when spelling keys it will create a new k:v pair if you misspell the key 
         # need to make sure to use upper/lower, etc when setting and retrieving name
 
 
@@ -72,6 +63,7 @@ class User(Person):
     def set_new_friend(self, friend):
         self._friend_lst.append(friend)
         return "added new friend to list"
+        # friend is a Friend object
 
 
     def get_friend_lst(self):
@@ -97,6 +89,10 @@ class User(Person):
         else:
             return "Friend not found."
 
+
+    def __repr__(self):
+        return repr('Name: ' + self.first_name + ' ' + self.last_name \
+                    + ', email: ' + self.email)
     
 
     """
@@ -123,6 +119,10 @@ class User(Person):
     [<__main__.Friend object at 0x7fffbcdf4c18>]
     >>> michelle.prnt_friend_lst()
     Annette 1970-04-18
+    >>> michd.get_friend('Annette', 'Heller', "Lu")
+    'Friend not found.'
+    >>> michd.get_friend('Annette', 'Heller', "Lum")
+    'Name: Annette Lum, birthday: April 18, 1970, days to birthday: 176'
     """
 
 class Friend(Person):
@@ -130,11 +130,11 @@ class Friend(Person):
         Person.__init__(self, first, middle, last)
 
 
-    def friend_info(self, email='', month=1, day = 1, year=1):
+    def friend_info(self, email='', month=1, day = 1, year=2020):
         # if a year is not available use this year's date
         self.email = email
         self.birthdate = date(year=year, month=month, day=day)
-        self.birthdatestr = self.birthdate.strftime("%B %d, %Y")
+        self.birthdatestr = self.birthdate.strftime("%B %d, %Y") #? maybe this should be protected
         today = date.today()
         this_year_birthday = date(today.year, month, day)
         self.days_to_birthday = (abs(this_year_birthday - today)).days
