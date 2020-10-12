@@ -1,0 +1,242 @@
+michd@DESKTOP-GNV4GB8:~$ ls
+Code
+michd@DESKTOP-GNV4GB8:~$ cd Code/
+michd@DESKTOP-GNV4GB8:~/Code$ ls
+PythonProj
+michd@DESKTOP-GNV4GB8:~/Code$ cd PythonProj/
+michd@DESKTOP-GNV4GB8:~/Code/PythonProj$ ls
+classpra.py  env  finprep.py  predprey.py  student.py
+michd@DESKTOP-GNV4GB8:~/Code/PythonProj$ python -i finprep.py
+>>> Michelle = User("Michelle", "Therese", "Dicks")
+>>> Michelle.first_name
+'Michelle'
+>>> Michelle.set_name_change(**{'first_name': "Michd"})
+updated name.
+>>> Michelle.first_name
+'Michd'
+>>> Michelle.email = ("michelle@gmail.com")
+>>> Michelle.email
+'michelle@gmail.com'
+>>> 
+KeyboardInterrupt
+>>> 
+KeyboardInterrupt
+>>> 
+michd@DESKTOP-GNV4GB8:~/Code/PythonProj$ python -i finprep.py
+  File "finprep.py", line 47
+    
+                                           ^
+IndentationError: expected an indented block
+>>> 
+KeyboardInterrupt
+>>> 
+michd@DESKTOP-GNV4GB8:~/Code/PythonProj$ python -i finprep.py
+>>> michd = User("Mic", "The", "Dic")
+>>> michd.UUID
+0
+>>> michd.email = "michd@gmail.com"
+>>> michd.email
+'michd@gmail.com'
+>>> michd.hint = {"What is your favorite book": "Sam the Seal"}
+>>> michd.hint
+{'What is your favorite book': 'Sam the Seal'}
+>>> michd.hint.items()
+[('What is your favorite book', 'Sam the Seal')]
+>>> michd.hint.values()
+['Sam the Seal']
+>>> michd.hint.keys()
+['What is your favorite book']
+>>> michd.hint['What is your favorite book']
+'Sam the Seal'
+>>> from datetime import date
+>>> d = date(2012, 12,31)
+>>> d
+datetime.date(2012, 12, 31)
+>>> d.isoformat()
+'2012-12-31'
+>>> d.ctime()
+'Mon Dec 31 00:00:00 2012'
+>>> today = date.today()
+>>> today
+datetime.date(2020, 10, 5)
+>>> time_to_birthday = abs(date - today)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: unsupported operand type(s) for -: 'type' and 'datetime.date'
+>>> import time
+>>> time_to_birthday = abs(date - today)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: unsupported operand type(s) for -: 'type' and 'datetime.date'
+>>> my_birthday = date(today.year, 6, 24)
+>>> my_birthday
+datetime.date(2020, 6, 24)
+>>> time_to_birthday = abs(my_birthday - today)
+>>> time_to_birthday
+datetime.timedelta(103)
+>>> time_to_birthday.days
+103
+>>> exit()
+michd@DESKTOP-GNV4GB8:~/Code/PythonProj$ python -i finprep.py
+  File "finprep.py", line 62
+    class Friend(Person):
+        ^
+IndentationError: expected an indented block
+>>> 
+michd@DESKTOP-GNV4GB8:~/Code/PythonProj$ python -i finprep.py
+>>> my_birthday = date(today.year, 11, 13)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'today' is not defined
+>>> import time
+>>> my_birthday = date(today.year, 11, 13)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'today' is not defined
+>>> exit()
+michd@DESKTOP-GNV4GB8:~/Code/PythonProj$ python -i finprep.py
+>>> from datetime import date
+>>> today = date.today()
+>>> birthday = date(today.year, 11, 13)
+>>> time_to_birthday = (abs(my_birthday - today)).days
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'my_birthday' is not defined
+>>> time_to_birthday = (abs(birthday - today)).days
+>>> time_to_birthday
+39
+>>> birthday.day
+13
+>>> birthday.month
+11
+>>> exit()
+michd@DESKTOP-GNV4GB8:~/Code/PythonProj$ python -i finprep.py
+>>> max = Friend("Maximilliman", "Center", "Piece")
+>>> max
+<__main__.Friend instance at 0x7f0636013280>
+>>> max.last_name
+'Piece'
+>>> max.friendinfo('max@gmail.com', [12, 31, 1932])
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: Friend instance has no attribute 'friendinfo'
+>>> max.friend_info('max@gmail.com', [12, 31, 1932])
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "finprep.py", line 70, in friend_info
+    self.days_to_birthday = self.__set_days_to_birthday()
+  File "finprep.py", line 74, in __set_days_to_birthday
+    this_year_birthday = date(today.year, self.birthdate.month, self.birthdate.day)
+TypeError: an integer is required
+>>> max.friend_info('max@gmail.com', 12, 31, 1932)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: friend_info() takes at most 3 arguments (5 given)
+>>> max.friend_info('max@gmail.com', date(12, 31, 1932))
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ValueError: month must be in 1..12
+>>> max.friend_info('max@gmail.com', date(1, 3, 1932))
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ValueError: day is out of range for month
+>>> max.friend_info('max@gmail.com', date(1, 1, 1989))
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ValueError: day is out of range for month
+>>> max.friend_info('max@gmail.com', date(1980, 12, 5)
+... )
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "finprep.py", line 70, in friend_info
+    self.days_to_birthday = self.__set_days_to_birthday()
+  File "finprep.py", line 74, in __set_days_to_birthday
+    this_year_birthday = date(today.year, self.birthdate.month, self.birthdate.day)
+TypeError: an integer is required
+>>> max.friend_info('max@gmail.com', date(1980, 12, 5))
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "finprep.py", line 70, in friend_info
+    self.days_to_birthday = self.__set_days_to_birthday()
+  File "finprep.py", line 74, in __set_days_to_birthday
+    this_year_birthday = date(today.year, self.birthdate.month, self.birthdate.day)
+TypeError: an integer is required
+>>> max.birthday.month
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: Friend instance has no attribute 'birthday'
+>>> max.birthdate.month
+<attribute 'month' of 'datetime.date' objects>
+>>> max.birthdate.month()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: 'getset_descriptor' object is not callable
+>>> type(max.birthday.month)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: Friend instance has no attribute 'birthday'
+>>> type(max.birthdate.month)
+<type 'getset_descriptor'>
+>>> 
+KeyboardInterrupt
+>>> 
+michd@DESKTOP-GNV4GB8:~/Code/PythonProj$ python -i finprep.py
+>>> max = Friend("Max", "The", "Great")
+>>> max.friend_info('max@gmail.com', date(1970, 11, 23))
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "finprep.py", line 71, in friend_info
+    this_year_birthday = date(today.year, date.month, date.day)
+TypeError: an integer is required
+>>> type(date)
+<type 'type'>
+>>> type(birthday)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'birthday' is not defined
+>>> max.email
+'max@gmail.com'
+>>> max.birthdate
+<type 'datetime.date'>
+>>> max.birthdate.isoformat()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: descriptor 'isoformat' of 'datetime.date' object needs an argument
+>>> max.birthdate.ctime()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: descriptor 'ctime' of 'datetime.date' object needs an argument
+>>> max.birthdate
+<type 'datetime.date'>
+>>> birthdate.isoformat()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'birthdate' is not defined
+>>> max.birthdate.strftime("%d/%m/%y")
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: descriptor 'strftime' requires a 'datetime.date' object but received a 'str'
+>>> type(max.birthdate)
+<type 'type'>
+>>> max.birthdate.ctime()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: descriptor 'ctime' of 'datetime.date' object needs an argument
+>>> max.birthdate.day
+<attribute 'day' of 'datetime.date' objects>
+>>> max.birthdate.day.ctime()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'getset_descriptor' object has no attribute 'ctime'
+>>> birthday = date(today.year, 11, 13)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'today' is not defined
+>>> today = date.today()
+>>> birthday = date(today.year, 11, 13)
+>>> birthday.day
+13
+>>> max.birthdate = date(2020, 10, 5)
+>>> max.birthdate.day
+5
+>>> 
