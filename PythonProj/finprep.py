@@ -126,6 +126,8 @@ class User(Person):
     """
 
 class Friend(Person):
+    _gift_lst = []
+    
     def __init__(self, first="", middle="", last=""):
         Person.__init__(self, first, middle, last)
 
@@ -166,3 +168,28 @@ class Friend(Person):
     """
 
     
+class Gift():
+    def __init__(self, name = '', URL='', notes=''):
+        self.idea = name
+        self.URL = URL
+        self.notes = notes
+        self.gift = {'Idea': self.idea, 'URL': self.URL, 'Notes': self.notes}
+
+    def set_updated_gift_info(self, **kwargs):
+        for k, v in kwargs.items():
+            setattr(self, k, v)
+        return 'updated friend info.'
+
+    def __repr__(self):
+        return repr('Idea: ' + self.idea + ', URL: ' + self.URL +\
+                    ', Notes: ' + self.notes)
+  """
+    >>> shoes = Gift('Cole Haan', 'https://stackoverflow.com/questions/1045344/how-do-you-create-an-incremental-id-in-a-python-class/54318273#54318273', 'I love these ballerina like slippers')
+    >>> repr(shoes)
+    "'Idea: Cole Haan, URL:https://stackoverflow.com/questions/1045344/how-do-you-create-an-incremental-id-in-a-python-class/54318273#54318273, Notes: I love these ballerina like slippers'"
+    >>> shoes.set_updated_gift_info(**{'idea': 'Nike'})
+    'updated friend info.'
+    >>> shoes.idea
+    'Nike'
+ 
+  """
