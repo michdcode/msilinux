@@ -78,7 +78,7 @@ class User(Person):
                 .format(friend.first_name, friend.middle_name,\
                         friend.last_name, friend.birthdatestr, 
                         friend.days_to_birthdaystr))
-
+    ### there is a bug here -- it will print out ALL friends, not just the friends of the person
 
     def get_friend(self, first, middle, last):
         for friend in self._friend_lst:
@@ -149,22 +149,38 @@ class Friend(Person):
         return 'updated friend info.'
 
 
+    def set_new_gift_on_giftlist(self, gift):
+        self._gift_lst.append(gift)
+        return "added new gift to giftlist"
+        #gift is a Gift object
+
+    def get_gift_lst(self):
+        return self._gift_lst
+
+    
+    def print_gift_lst(self):
+        for count, gift in enumerate(self._gift_lst, 1):
+            print(count, gift)
+
+
     def __repr__(self):
         return repr('Name: ' + self.first_name + ' ' + self.last_name \
                     + ', birthday: ' + self.birthdatestr \
                     + ', days to birthday: ' + self.days_to_birthdaystr)
     """
-        >>> alice = Friend("Alice", "In", "Wonderland")
-        >>> alice.friend_info('alice@email.com', 7, 12, 1982)
-        >>> alice.birthdate
-        datetime.date(1982, 7, 12)
-        >>> alice.days_to_birthday
-        90
-        
         >>> annette = Friend("Annette", "Heller", "Lum")
         >>> annette.friend_info('annlum@email.com', 4, 18, 1970)
+        >>> shoes = Gift('Cole Haan', 'https://www.colehaan.com', 'She likes ballet, these slippers are perfect')
+        >>> hat = Gift('Dodgers', 'https://www.dodgers.com', 'She and her husband like the Dodgers')
+        >>> annette.set_new_gift_on_giftlist(shoes)
+        'added new gift to giftlist'
+        >>> annette.set_new_gift_on_giftlist(hat)
+        'added new gift to giftlist'
+        >>> annette.print_gift_lst()
+        1 'Idea: Cole Haan, URL: https://www.colehaan.com, Notes: She likes ballet, these slippers are perfect'
+        2 'Idea: Dodgers, URL: https://www.dodgers.com, Notes: She and her husband like the Dodgers'
         >>> repr(annette)
-        "'Name:Annette Lum, birthday: April/18/1970, days to birthday: 176'"
+        "'Name:Annette Lum, birthday: April/18/1970, daAys to birthday: 176'"
     """
 
     
@@ -183,13 +199,16 @@ class Gift():
     def __repr__(self):
         return repr('Idea: ' + self.idea + ', URL: ' + self.URL +\
                     ', Notes: ' + self.notes)
-  """
-    >>> shoes = Gift('Cole Haan', 'https://stackoverflow.com/questions/1045344/how-do-you-create-an-incremental-id-in-a-python-class/54318273#54318273', 'I love these ballerina like slippers')
-    >>> repr(shoes)
-    "'Idea: Cole Haan, URL:https://stackoverflow.com/questions/1045344/how-do-you-create-an-incremental-id-in-a-python-class/54318273#54318273, Notes: I love these ballerina like slippers'"
-    >>> shoes.set_updated_gift_info(**{'idea': 'Nike'})
-    'updated friend info.'
-    >>> shoes.idea
-    'Nike'
  
-  """
+ 
+ 
+    """
+        >>> shoes = Gift('Cole Haan', 'https://www.colehaan.com', 'She likes ballet, these slippers are perfect')
+        >>> repr(shoes)
+        "'Idea: Cole Haan, URL:https://stackoverflow.com/questions/1045344/how-do-you-create-an-incremental-id-in-a-python-class/54318273#54318273, Notes: I love these ballerina like slippers'"
+        >>> shoes.set_updated_gift_info(**{'idea': 'Nike'})
+        'updated friend info.'
+        >>> shoes.idea
+        'Nike'
+    
+    """
