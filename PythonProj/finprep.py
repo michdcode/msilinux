@@ -43,18 +43,16 @@ class Person():
 
     
 class User(Person):
-    _friend_lst = []
-    
-    
+          
     def __init__(self, first="", middle="", last=""):
         Person.__init__(self, first, middle, last)
-
+        self._friend_lst = []
 
     def user_info(self, email='', pwd='', hint={}):
         self.email = email
         self.__password = pwd
         self.hint = hint
-
+        
 
     def __set_new_pwd(self, new_pwd):
         self.__password = new_pwd
@@ -78,8 +76,8 @@ class User(Person):
                 .format(friend.first_name, friend.middle_name,\
                         friend.last_name, friend.birthdatestr, 
                         friend.days_to_birthdaystr))
-    ### there is a bug here -- it will print out ALL friends, not just the friends of the person
-
+   
+   
     def get_friend(self, first, middle, last):
         for friend in self._friend_lst:
             if (first == friend.first_name) and\
@@ -126,11 +124,10 @@ class User(Person):
     """
 
 class Friend(Person):
-    _gift_lst = []
     
     def __init__(self, first="", middle="", last=""):
         Person.__init__(self, first, middle, last)
-
+        self._gift_lst = []
 
     def friend_info(self, email='', month=1, day = 1, year=2020):
         # if a year is not available use this year's date
@@ -141,7 +138,7 @@ class Friend(Person):
         this_year_birthday = date(today.year, month, day)
         self.days_to_birthday = (abs(this_year_birthday - today)).days
         self.days_to_birthdaystr = str(self.days_to_birthday)
-             
+         
 
     def set_updated_friend_info(self, **kwargs):
         for k, v in kwargs.items():
