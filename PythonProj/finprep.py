@@ -9,7 +9,7 @@ class Person(object):
     _UUID_counter = itertools.count()
     _UUID_lst = []
 
-    def __init__(self, first="", last=""):
+    def __init__(self, first, last):
         """This constructor creates a person object."""
         self.first_name = first
         self.last_name = last
@@ -29,14 +29,14 @@ class Person(object):
 class User(Person):
     """User is subclass of Person, who is tracking gift ideas."""
 
-    def __init__(self, first="", last="", email='', pwd='', hint={}):
+    def __init__(self, first, last, email):
         """Creates a User object, which is a subclass of Person."""
 
         Person.__init__(self, first, last)
         self.email = email
-        # in real life would not store password as plain text
-        self.__password = pwd
-        self.hint = hint
+        # # in real life would not store password as plain text
+        # self.__password = pwd
+        # self.hint = hint
         self._friend_lst = []
 
     def set_updated_user(self, **kwargs):
@@ -85,8 +85,7 @@ class User(Person):
 class Friend(Person):
     """Friend is subclass of Person,potential gift recipient."""
 
-    def __init__(self, first="", last="", email='', month=1, day=1,
-                 year=2020):
+    def __init__(self, first, last, month, day, year):
         """Creates a Friend object, which is subclass of Person."""
 
         Person.__init__(self, first, last)
@@ -134,7 +133,7 @@ class Friend(Person):
 class Gift():
     """Generic class to store gift information."""
 
-    def __init__(self, name='', URL='', notes=''):
+    def __init__(self, name, URL, notes):
         """Creates a gift object."""
 
         self.idea = name
