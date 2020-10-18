@@ -1,8 +1,15 @@
 import string_utils as su
 import finprep as fp
-import helper_functions as hf
+from helper_functions import *
 import sys
 
+# variables and data structures
+
+end_users = []
+user_friends = []
+friend_gifts = []
+
+choice = 0
 
 # Welcome
 print("Welcome to Birthday Budddy!")
@@ -31,14 +38,18 @@ while True:
 
 # clean data and create new user 
 
-name_snake = name.replace(" ", "_")
-CurrentUser = su.snake_case_to_camel(name_snake)
-first, last = name.title().split(" ")
-CurrentUser = fp.User(first, last, email)
-print("Welcome, here is the information on file: ")
-repr(CurrentUser)
+def add_new_user(name, email): 
+    first, last = name.title().split(" ")
+    CurrentUser = fp.User(first, last, email)
+    end_users.append({name: CurrentUser})
+    print("Welcome, here is the information on file: ")
+    print(repr(CurrentUser))
+    return CurrentUser
 
-# main menu
+add_new_user(name, email)
+
+# for item in end_users:
+#     print(item)
 
 
 def display_main_menu():
@@ -56,7 +67,7 @@ def get_user_option():
     while True:
         try:
             pick = int(input("Enter number corresponding to your"
-                               "choice: "))
+                             " choice: "))
             if (pick > 8) or (pick < 1):
                 raise ValueError("Choices are between 1 and 8 only.")
         except ValueError as error:
@@ -65,12 +76,14 @@ def get_user_option():
             return pick
 
 
-while choice != 8
+while choice is not 8:
     display_main_menu()
     option = get_user_option()
     
     if option == 1:
-        hf.add_new_friend()
+        new_friend = add_new_friend()
+        user_friends.append({name: CurrentUser})
+        CurrentUser.set_new_friend(new_friend)
     elif option == 2:
         add_new_gift()
     elif option == 3:

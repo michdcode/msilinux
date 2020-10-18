@@ -89,7 +89,7 @@ class Friend(Person):
         """Creates a Friend object, which is subclass of Person."""
 
         Person.__init__(self, first, last)
-        self.email = email
+        # self.email = email
         self.birthdate = date(year=year, month=month, day=day)
         self.birthdatestr = self.birthdate.strftime("%B %d, %Y")
         today = date.today()
