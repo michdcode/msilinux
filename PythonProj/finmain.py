@@ -1,7 +1,9 @@
-import string_utils as su
-import finprep as fp
-from helper_functions import *
+# Standard Library Imports 
 import sys
+import string_utils as su
+
+# Local imports
+from helper_functions import *
 
 # variables and data structures
 
@@ -22,13 +24,8 @@ while True:
         name = (str(input("Enter your first and last name seperated "
                           "by a space, omit prefixes and suffixes: ")))
         email = (str(input("Enter your email address: ")))
-        if not su.is_full_string(name):
-            raise ValueError("Enter a name.")
-        elif su.is_number(name):  # name is not just numbers
-            raise ValueError("Enter a name, not a number.")
-        elif not name.count(" ") == 1:  # name is not two words
-            raise ValueError("Enter two names with a space in between")
-        elif not su.is_email(email):  # check that it is email
+        name_validation(name)
+        if not su.is_email(email):  # check that it is email
             raise ValueError("You did not enter an email address.")
     except ValueError as error:
         print(error)
@@ -37,67 +34,63 @@ while True:
 
 
 # clean data and create new user 
+if len(end_users) > 1: 
+    for existing_users in end_users[0]:
+        if existing_users == name:
+            print("That user already exists.")
+            break
+NewUser = add_new_user(name, email)
+user_key = NewUser.first_name + " " + NewUser.last_name
+end_users.append({user_key: NewUser})
+CurrentUser = NewUser
 
-def add_new_user(name, email): 
-    first, last = name.title().split(" ")
-    CurrentUser = fp.User(first, last, email)
-    end_users.append({name: CurrentUser})
-    print("Welcome, here is the information on file: ")
-    print(repr(CurrentUser))
-    return CurrentUser
-
-add_new_user(name, email)
-
-# for item in end_users:
-#     print(item)
-
-
-def display_main_menu():
-
-    options = ["Add a new friend", "Add a new gift idea",
-               "List of friends", "Get list of gifts for a friend",
-               "Update name or email", "Update friend information",
-               "Update gift information", "Exit"]
-    print("Please choose one of these options: ")
-    for count, option in enumerate(options, 1):
-        print(count, option)
-
-
-def get_user_option():
-    while True:
-        try:
-            pick = int(input("Enter number corresponding to your"
-                             " choice: "))
-            if (pick > 8) or (pick < 1):
-                raise ValueError("Choices are between 1 and 8 only.")
-        except ValueError as error:
-            print(error)
-        else:
-            return pick
-
-
-while choice is not 8:
+while choice is not 99:
     display_main_menu()
     option = get_user_option()
-    
+ 
+    # Add a new friend
     if option == 1:
-        new_friend = add_new_friend()
-        user_friends.append({name: CurrentUser})
-        CurrentUser.set_new_friend(new_friend)
+        NewFriend = add_new_friend()
+        friend_key = NewFriend.first_name + " " + NewFriend.last_name
+        user_friends.append({friend_key: NewFriend})
+        CurrentUser.set_new_friend(NewFriend)
+    # Add a new gift idea
     elif option == 2:
         add_new_gift()
+        print()
+    # List of friends
     elif option == 3:
-        get_friend_list()
-    elif option == 4:
-        get_friend_gift_list()
+        lst_of_friends = CurrentUser.prnt_friend_lst()
+        print(lst_of_friends)
+        print("Outputting list of friends to file named friends.txt")
+        filename = open("friends.txt", "w")
+        for item in CurrentUser.get_friend_lst():
+            s = (str(item)) + "\n"
+            filename.write(s)
+        filename.close()
+    # Get list of gifts for a friend
+    # elif option == 4:
+    #     if len(user_friends) < 1:
+    #         print("You do not have any friends")
+    #         break
+    #     print("Enter the first and last name with a space in between.")
+    #     find_friend = input("Use exact name as originally entered: ")
+    #     name_validation(find_friend)
+    #     find_friend = find_friend.title()
+    #     for friends in user_friends[0]
+    #     find_friend_gifts = 
+    # Update name or email
     elif option == 5:
         update_user_info()
+    # Update friend information
     elif option == 6:
         update_friend_info()
+    # Update gift information"
     elif option == 7:
         update_gift_info()
-    elif option == 8:
-        choice = 8
+    # Exit
+    elif option == 99:
+        choice = 99
 
 print("Thank you for using Birthday Buddy.")
 print("Exiting.")

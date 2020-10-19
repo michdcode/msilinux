@@ -1,40 +1,59 @@
 import finprep as fp
 import string_utils as su
 
+
+"""
+************************************************
+ instantion related functions
+************************************************
+"""
+
+
+def add_new_user(name, email):
+    """Clean data and create User instance."""
+    first, last = name.title().split(" ")
+    NewUser = fp.User(first, last, email)
+    print("Welcome, here is the information on file: ")
+    print(repr(NewUser))
+    return NewUser
+
+
 def add_new_friend():
-    # get_current_user()
+    """Get information and create friend instance."""
     while True:
         try:
-            name = (str(input("Enter your friend's first and last name"
-                              " seperated by a space, omit prefixes"
-                              " and suffixes: ")))
+            friend = (str(input("Enter your friend's first and last name"
+                                " seperated by a space, omit prefixes"
+                                " and suffixes: ")))
             print("Enter birthday. Use a leading zero for months 1-9."
                   " You can use any of the past 100 years")
             birthday = input("Use this format MM/DD/YYYY: ")
-            if not su.is_full_string(name):
-                raise ValueError("Enter a name.")
-            elif su.is_number(name):  # name is not just numbers
-                raise ValueError("Enter a name, not a number.")
-            elif not name.count(" ") == 1:  # name is not two words
-                raise ValueError("Enter two names with a space in between")
-            elif not validate_date(birthday):
+            name_validation(friend)
+            if not validate_date(birthday):
                 raise ValueError("You did not enter a valid birthday.")
         except ValueError as error:
             print(error)
         else:
-            new_friend = add_friend_to_dict(name, birthday)
+            new_friend = add_friend(friend, birthday)
             return new_friend
             # next up is to add friend to user's friend list
 
 
-def add_friend_to_dict(name, birthday):
-    first, last = name.title().split(" ")
+def add_friend(friend, birthday):
+    """Clean data and create Friend instance."""
+    first, last = friend.title().split(" ")
     month, day, year = birthday.split("/")
     CurrentFriend = fp.Friend(first, last, int(month), int(day), int(year))
     print("Your new friend has been added.")
     print(repr(CurrentFriend))
     return CurrentFriend
 
+
+"""
+************************************************
+validation functions
+************************************************
+"""
 
 
 def validate_date(date):
@@ -73,3 +92,44 @@ def validate_date(date):
     else:
         return False
 
+
+def name_validation(name_to_check):
+    """Make sure name is not empty, two words, not numbers."""
+    if not su.is_full_string(name_to_check):
+        raise ValueError("Enter a name.")
+    elif su.is_number(name_to_check):  # name is not just numbers
+        raise ValueError("Enter a name, not a number.")
+    elif not name_to_check.count(" ") == 1:  # name is not two words
+        raise ValueError("Enter two names with a space in between")
+
+
+"""
+************************************************
+menu functions
+************************************************
+"""
+
+
+def display_main_menu():
+    """Shows main options for program."""
+    options = ["Add a new friend", "Add a new gift idea",
+               "See list of friends", "Get list of gifts for a friend",
+               "Update name or email", "Update friend information",
+               "Update gift information", "Exit"]
+    print("Please choose one of these options: ")
+    for count, option in enumerate(options, 1):
+        print(count, option)
+
+
+def get_user_option():
+    """Allows user to choose next action to take."""
+    while True:
+        try:
+            pick = int(input("Enter number corresponding to your"
+                             " choice: "))
+            if (pick > 8) or (pick < 1):
+                raise ValueError("Choices are between 1 and 8 only.")
+        except ValueError as error:
+            print(error)
+        else:
+            return pick

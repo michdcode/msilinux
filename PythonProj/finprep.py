@@ -126,8 +126,8 @@ class Friend(Person):
         """Returns offical representation of Friend object."""
 
         return repr('Name: ' + self.first_name + ' ' + self.last_name
-                    + ', birthday: ' + self.birthdatestr
-                    + ', days to birthday: ' + self.days_to_birthdaystr)
+                    + ', Birthday: ' + self.birthdatestr
+                    + ', Days to Birthday: ' + self.days_to_birthdaystr)
 
 
 class Gift():
