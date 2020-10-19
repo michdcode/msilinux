@@ -19,7 +19,7 @@ def add_new_user(name, email):
 
 
 def add_new_friend():
-    """Get information and create friend instance."""
+    """Get information and create Friend instance."""
     while True:
         try:
             friend = (str(input("Enter your friend's first and last name"
@@ -36,7 +36,6 @@ def add_new_friend():
         else:
             new_friend = add_friend(friend, birthday)
             return new_friend
-            # next up is to add friend to user's friend list
 
 
 def add_friend(friend, birthday):
@@ -47,6 +46,28 @@ def add_friend(friend, birthday):
     print("Your new friend has been added.")
     print(repr(CurrentFriend))
     return CurrentFriend
+
+
+def add_new_gift():
+    """Get information and create new Gift instance."""
+
+    while True:
+        try:
+            gift_name = str(input("Enter the name of the gift idea: "))
+            gift_URL = str(input("Please paste the URL of the gift: "))
+            gift_note = str(input("Enter an optional note: "))
+            if not su.is_full_string(gift_name):
+                raise ValueError("Enter a name for the gift idea.")
+            if not su.is_url(gift_URL):
+                raise ValueError("Enter a valid URL.")
+        except ValueError as error:
+            print(error)
+        else:
+            NewGift = fp.Gift(gift_name, gift_URL, gift_note)
+            print("Your gift idea has been added.")
+            print(repr(NewGift))
+            return NewGift
+
 
 
 """
@@ -95,11 +116,11 @@ def validate_date(date):
 
 def name_validation(name_to_check):
     """Make sure name is not empty, two words, not numbers."""
-    if not su.is_full_string(name_to_check):
+    if not su.is_full_string(name_to_check): # at least 1 non-space
         raise ValueError("Enter a name.")
-    elif su.is_number(name_to_check):  # name is not just numbers
+    elif su.is_number(name_to_check):  # not just numbers
         raise ValueError("Enter a name, not a number.")
-    elif not name_to_check.count(" ") == 1:  # name is not two words
+    elif not name_to_check.count(" ") == 1:  # not two words
         raise ValueError("Enter two names with a space in between")
 
 

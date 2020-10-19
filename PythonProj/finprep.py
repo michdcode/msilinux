@@ -133,12 +133,12 @@ class Friend(Person):
 class Gift():
     """Generic class to store gift information."""
 
-    def __init__(self, name, URL, notes):
+    def __init__(self, name, URL, notes=""):
         """Creates a gift object."""
 
         self.idea = name
         self.URL = URL
-        self.notes = notes
+        self.notes = notes  # notes are optional so added a default
         self.gift = {'Idea': self.idea, 'URL': self.URL, 'Notes': self.notes}
 
     def set_updated_gift_info(self, **kwargs):
