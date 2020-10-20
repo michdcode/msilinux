@@ -64,8 +64,6 @@ def add_new_gift():
             print(error)
         else:
             NewGift = fp.Gift(gift_name, gift_URL, gift_note)
-            print("Your gift idea has been added.")
-            print(repr(NewGift))
             return NewGift
 
 
