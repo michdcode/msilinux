@@ -34,11 +34,6 @@ while True:
 
 
 # clean data and create new user
-if len(end_users) > 1: 
-    for existing_users in end_users[0]:
-        if existing_users == name:
-            print("That user already exists.")
-            break
 NewUser = add_new_user(name, email)
 user_key = NewUser.first_name + " " + NewUser.last_name
 end_users.append({user_key: NewUser})
@@ -66,8 +61,8 @@ while choice is not 99:
         find_friend = find_friend.title()
         try:
             for friend in user_friends[0]:
-                if friend.get(find_friend, "False") != False:
-                    friend.set_new_gift_on_giftlist(NewGift)
+                if friend == find_friend:
+                    friend[find_friend].set_new_gift_on_giftlist(NewGift)
                     friend_gifts.append({NewGift.idea: NewGift})
                     print("Added the gift to your friends gift list!")
         except KeyError as error:
@@ -98,7 +93,7 @@ while choice is not 99:
         # find_friend = input("Use exact name as originally entered: ")
         # name_validation(find_friend)
         # find_friend = find_friend.title()
-        # for friends in user_friends[0]
+        # 
     #     find_friend_gifts = 
     # Update name or email
     elif option == 5:
@@ -122,15 +117,3 @@ if choice == 99:
 
 
 
-
-"""
-# password = (str(input("Enter a password with 8 or more "
-        #             "characters: ")))
-        # hint = (str(input("Enter a hint to remember your password: ")))
-
-if (not su.is_full_string(name)) or (not
-            su.is_full_string(password)) or (not
-            su.is_full_string(hint)):
-elif len(password) < 8:
-            raise ValueError("Password must be at least 8 characters")
-"""
