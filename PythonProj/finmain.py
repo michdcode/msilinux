@@ -62,14 +62,18 @@ while choice is not 99:
         find_friend = input("Enter the first and last name with a"
                             " space in between of the friend you "
                             "have a gift idea for: ")
+        name_validation(find_friend)
+        find_friend = find_friend.title()
         try:
-            name_validation(find_friend)
-            find_friend = find_friend.title()
-            user_friends[0][find_friend].set_new_gift_on_giftlist(NewGift)
-            friend_gifts.append({NewGift.idea: NewGift})
-            print("Added the gift to your friends gift list!")
-        except KeyError:
-            print("Could not find friend on your list, gift not added.")
+            for friend in user_friends[0]:
+                if friend.get(find_friend, "False") != False:
+                    friend.set_new_gift_on_giftlist(NewGift)
+                    friend_gifts.append({NewGift.idea: NewGift})
+                    print("Added the gift to your friends gift list!")
+        except KeyError as error:
+            print(error)
+        else:
+            "Could not find friend on your list, gift not added."
         
 #>>> user_friends[0]['Ann Lum']._gift_lst
 #['Idea: Pears, URL: https://www.harryanddavid.com/h/gift-baskets-tower-boxes/all-occasion-gift-boxes/13488, Notes: She loves these harry and david peaches']
