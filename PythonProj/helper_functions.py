@@ -4,7 +4,7 @@ import string_utils as su
 
 """
 ************************************************
- instantion related functions
+ class related functions
 ************************************************
 """
 
@@ -25,13 +25,13 @@ def add_new_friend():
             friend = (str(input("Enter your friend's first and last name"
                                 " seperated by a space, omit prefixes"
                                 " and suffixes: ")))
-            birthday = input("Enter birthday in this format "
-                                 "with no leading zeros MM/DD/YYYY: ")
+            birthday = input("Enter birthday in this format with no leading"
+                             " zeros MM/DD/YYYY: ")
             new_friend = add_friend(friend, birthday)
             return new_friend
         except ValueError as error:
             print(error)
-                  
+
 
 
 def add_friend(friend, birthday):
@@ -63,6 +63,8 @@ def add_new_gift():
             return NewGift
 
 
+def update_user_info():
+    
 
 """
 ************************************************

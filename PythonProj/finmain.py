@@ -21,7 +21,7 @@ print("Let's get started!")
 # Sign up user and validate data
 while True:
     try:
-        name = (str(input("Enter your first and last name seperated "
+        name = (str(input("Enter your first and last name separated "
                           "by a space, omit prefixes and suffixes: ")))
         email = (str(input("Enter your email address: ")))
         name_validation(name)
@@ -31,8 +31,6 @@ while True:
         print(error)
     else:
         break
-
-# clean data and create new user
 NewUser = add_new_user(name, email)
 end_users.append(NewUser)
 CurrentUser = NewUser
@@ -82,10 +80,7 @@ while choice is not 8:
         filename.close()
     # Get list of gifts for a friend
     elif option == 4:
-        if len(user_friends) < 1:
-            print("You do not have any friends")
-            break
-        print("Enter the first and last name with a space in between.")
+        print("Enter friend's first and last name with a space in between.")
         find_friend = input("Use exact name as originally entered: ")
         name_validation(find_friend)
         find_friend = find_friend.title()
@@ -103,8 +98,40 @@ while choice is not 8:
         else:
             "Could not find friend on your list, please try again."
     # Update name or email
-    elif option == 5:
-        update_user_info()
+    elif option == 5:       
+        try:
+            print("If you don't need to update your name just press enter.")
+            name = (str(input("Otherwise, enter your first and last name "
+                              "separated by a space, omit prefixes and "
+                              "suffixes : ")))
+            print("If you don't need to update your email just press enter.")
+            email = (str(input("Enter your email address: ")))
+            if name:
+                name_validation(name)
+            if (email) and (not su.is_email(email)):  # check that it is email
+                raise ValueError("You did not enter an email address.")
+            OldUser = CurrentUser
+        except ValueError as error:
+            print(error)
+        else:
+            if (name) and (email):
+                first, last = name.title().split()
+                CurrentUser.set_updated_user(**{'first_name': first,
+                                                'last_name': last,
+                                                'email': email})
+            elif name:
+                first, last = name.title().split()
+                CurrentUser.set_updated_user(**{'first_name': first,
+                                                'last_name': last})
+            elif email:
+                CurrentUser.set_updated_user(**{'email': email})
+            for user in end_users:
+                if user == OldUser:
+                    end_users.remove(OldUser)
+                    end_users.append(CurrentUser)
+            print("Information updated!")
+
+
     # Update friend information
     elif option == 6:
         update_friend_info()
