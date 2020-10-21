@@ -5,7 +5,7 @@ import string_utils as su
 # Local imports
 from helper_functions import *
 
-# variables and data structures
+# initialize variables and data structures
 
 end_users = []
 user_friends = []
@@ -14,11 +14,11 @@ friend_gifts = []
 choice = 0
 
 # Welcome
-print("Welcome to Birthday Budddy!")
+print("Welcome to Birthday Buddy!")
 print("Birthday Buddy helps track friends birthdays and gift ideas.")
 print("Let's get started!")
 
-# Sign Up User and validate data
+# Sign up user and validate data
 while True:
     try:
         name = (str(input("Enter your first and last name seperated "
@@ -32,47 +32,43 @@ while True:
     else:
         break
 
-
 # clean data and create new user
 NewUser = add_new_user(name, email)
-user_key = NewUser.first_name + " " + NewUser.last_name
-end_users.append({user_key: NewUser})
+end_users.append(NewUser)
 CurrentUser = NewUser
 
-while choice is not 99:
+
+# main control of program
+while choice is not 8:
     display_main_menu()
     option = get_user_option()
 
     # Add a new friend
     if option == 1:
         NewFriend = add_new_friend()
-        friend_key = NewFriend.first_name + " " + NewFriend.last_name
-        user_friends.append({friend_key: NewFriend})
+        user_friends.append(NewFriend)
         CurrentUser.set_new_friend(NewFriend)
     # Add a new gift idea
     elif option == 2:
         if len(user_friends) < 1:
             print("Enter a friend before adding a gift.")
         NewGift = add_new_gift()
-        find_friend = input("Enter the first and last name with a"
-                            " space in between of the friend you "
-                            "have a gift idea for: ")
+        find_friend = input("Enter the first and last name with a space in "
+                            "between of friend you have a gift idea for: ")
         name_validation(find_friend)
         find_friend = find_friend.title()
+        friend_first, friend_last = find_friend.split()
         try:
-            for friend in user_friends[0]:
-                if friend == find_friend:
-                    friend[find_friend].set_new_gift_on_giftlist(NewGift)
-                    friend_gifts.append({NewGift.idea: NewGift})
+            for friend in user_friends:
+                if (friend_first == friend.first_name) and\
+                   (friend_last == friend.last_name):
+                    friend.set_new_gift_on_giftlist(NewGift)
+                    friend_gifts.append(NewGift)
                     print("Added the gift to your friends gift list!")
         except KeyError as error:
             print(error)
         else:
             "Could not find friend on your list, gift not added."
-        
-#>>> user_friends[0]['Ann Lum']._gift_lst
-#['Idea: Pears, URL: https://www.harryanddavid.com/h/gift-baskets-tower-boxes/all-occasion-gift-boxes/13488, Notes: She loves these harry and david peaches']
-
 
     # List of friends
     elif option == 3:
@@ -85,16 +81,27 @@ while choice is not 99:
             filename.write(s)
         filename.close()
     # Get list of gifts for a friend
-    # elif option == 4:
-        # if len(user_friends) < 1:
-        #     print("You do not have any friends")
-        #     break
-        # print("Enter the first and last name with a space in between.")
-        # find_friend = input("Use exact name as originally entered: ")
-        # name_validation(find_friend)
-        # find_friend = find_friend.title()
-        # 
-    #     find_friend_gifts = 
+    elif option == 4:
+        if len(user_friends) < 1:
+            print("You do not have any friends")
+            break
+        print("Enter the first and last name with a space in between.")
+        find_friend = input("Use exact name as originally entered: ")
+        name_validation(find_friend)
+        find_friend = find_friend.title()
+        friend_first, friend_last = find_friend.split()
+        try:
+            for friend in user_friends:
+                if (friend_first == friend.first_name) and\
+                   (friend_last == friend.last_name):
+                    print("The gift list for {} {} is:".format
+                          (friend.first_name, friend.last_name))
+                    for gift in friend._gift_lst:
+                        print(gift)
+        except KeyError as error:
+            print(error)
+        else:
+            "Could not find friend on your list, please try again."
     # Update name or email
     elif option == 5:
         update_user_info()
@@ -105,10 +112,10 @@ while choice is not 99:
     elif option == 7:
         update_gift_info()
     # Exit
-    elif option == 99:
-        choice = 99
+    elif option == 8:
+        choice = 8
 
-if choice == 99:
+if choice == 9:
     print("Thank you for using Birthday Buddy.")
     print("Exiting.")
     sys.exit()

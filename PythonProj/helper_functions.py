@@ -106,7 +106,7 @@ def get_user_option():
             pick = int(input("Enter number corresponding to your"
                              " choice: "))
             if (pick > 8) or (pick < 1):
-                raise ValueError("Choices are between 1 and 8 only.")
+                raise ValueError("Choices are between 1 and 8, or 99.")
         except ValueError as error:
             print(error)
         else:
