@@ -127,7 +127,8 @@ class Friend(Person):
 
         return repr('Name: ' + self.first_name + ' ' + self.last_name
                     + ', Birthday: ' + self.birthdatestr
-                    + ', Days to Birthday: ' + self.days_to_birthdaystr)
+                    + ', Days to or from (if you missed it this year) Birthday: '
+                    + self.days_to_birthdaystr)
 
 
 class Gift():

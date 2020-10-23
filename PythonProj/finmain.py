@@ -6,7 +6,6 @@ import string_utils as su
 from helper_functions import *
 
 # initialize variables and data structures
-
 end_users = []
 user_friends = []
 friend_gifts = []
@@ -48,14 +47,18 @@ while choice is not 8:
         CurrentUser.set_new_friend(NewFriend)
     # Add a new gift idea
     elif option == 2:
-        if len(user_friends) < 1:
-            print("Enter a friend before adding a gift.")
-        NewGift = add_new_gift()
-        find_friend = input("Enter the first and last name with a space in "
-                            "between of friend you have a gift idea for: ")
-        name_validation(find_friend)
-        find_friend = find_friend.title()
-        friend_first, friend_last = find_friend.split()
+        try: 
+            if len(user_friends) < 1:
+                print("Enter a friend before adding a gift.")
+            NewGift = add_new_gift()
+            find_friend = input("Enter the first and last name with a space in "
+                                "between of friend you have a gift idea for: ")
+            name_validation(find_friend)
+            find_friend = find_friend.title()
+            friend_first, friend_last = find_friend.split()
+        except ValueError as error:
+            print("Improper friend name entered, {}. ").format(error)
+            # need to return to main program again.
         try:
             for friend in user_friends:
                 if (friend_first == friend.first_name) and\
@@ -91,19 +94,22 @@ while choice is not 8:
                    (friend_last == friend.last_name):
                     print("The gift list for {} {} is:".format
                           (friend.first_name, friend.last_name))
-                    for gift in friend._gift_lst:
-                        print(gift)
+                    if len(friend._gift_lst) > 1: 
+                        for gift in friend._gift_lst:
+                            print(gift)
+                    else:
+                        print("No gifts on gift list yet.")
         except KeyError as error:
             print(error)
         else:
             "Could not find friend on your list, please try again."
     # Update name or email
-    elif option == 5:       
+    elif option == 5:
         try:
             print("If you don't need to update your name just press enter.")
             name = (str(input("Otherwise, enter your first and last name "
                               "separated by a space, omit prefixes and "
-                              "suffixes : ")))
+                              "suffixes: ")))
             print("If you don't need to update your email just press enter.")
             email = (str(input("Enter your email address: ")))
             if name:
@@ -131,10 +137,46 @@ while choice is not 8:
                     end_users.append(CurrentUser)
             print("Information updated!")
 
-
-    # Update friend information
+    #Update friend information
     elif option == 6:
-        update_friend_info()
+        try:
+            print("If you don't need to update a field, just leave it blank.")
+            friend = (str(input("Enter your friend's first and last name"
+                                " seperated by a space, omit prefixes"
+                                " and suffixes: ")))
+            birthday = input("Enter birthday in this format with no leading"
+                             " zeros MM/DD/YYYY: ")
+            if friend:
+                name_validation(name)
+            if (email) and (not su.is_email(email)):  # check that it is email
+                raise ValueError("You did not enter an email address.")
+            OldFriend = friend
+        except ValueError as error:
+            print(error)
+        else:
+            
+            
+            
+            if (name) and (birthday):
+                first, last = name.title().split()
+                
+                CurrentUser.set_updated_user(**{'first_name': first,
+                                                'last_name': last,
+                                                'email': email})
+            elif name:
+                first, last = name.title().split()
+                CurrentUser.set_updated_user(**{'first_name': first,
+                                                'last_name': last})
+            elif email:
+                CurrentUser.set_updated_user(**{'email': email})
+            for user in end_users:
+                if user == OldUser:
+                    end_users.remove(OldUser)
+                    end_users.append(CurrentUser)
+            print("Information updated!")
+        
+        
+        
     # Update gift information"
     elif option == 7:
         update_gift_info()

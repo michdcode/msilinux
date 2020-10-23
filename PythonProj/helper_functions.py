@@ -27,11 +27,11 @@ def add_new_friend():
                                 " and suffixes: ")))
             birthday = input("Enter birthday in this format with no leading"
                              " zeros MM/DD/YYYY: ")
+            name_validation(friend)
             new_friend = add_friend(friend, birthday)
             return new_friend
         except ValueError as error:
             print(error)
-
 
 
 def add_friend(friend, birthday):
@@ -62,9 +62,7 @@ def add_new_gift():
             NewGift = fp.Gift(gift_name, gift_URL, gift_note)
             return NewGift
 
-
-def update_user_info():
-    
+  
 
 """
 ************************************************
@@ -108,7 +106,7 @@ def get_user_option():
             pick = int(input("Enter number corresponding to your"
                              " choice: "))
             if (pick > 8) or (pick < 1):
-                raise ValueError("Choices are between 1 and 8, or 99.")
+                raise ValueError("Choices are between 1 and 8.")
         except ValueError as error:
             print(error)
         else:
