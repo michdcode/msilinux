@@ -89,7 +89,6 @@ class Friend(Person):
         """Creates a Friend object, which is subclass of Person."""
 
         Person.__init__(self, first, last)
-        # self.email = email
         self.birthdate = date(year=year, month=month, day=day)
         self.birthdatestr = self.birthdate.strftime("%B %d, %Y")
         today = date.today()
@@ -127,7 +126,7 @@ class Friend(Person):
 
         return repr('Name: ' + self.first_name + ' ' + self.last_name
                     + ', Birthday: ' + self.birthdatestr
-                    + ', Days to or from (if you missed it this year) Birthday: '
+                    + ', Days to Birthday: '
                     + self.days_to_birthdaystr)
 
 
@@ -153,50 +152,3 @@ class Gift():
         return repr('Idea: ' + self.idea + ', URL: ' + self.URL +
                     ', Notes: ' + self.notes)
 
-    """
-    michelle = User("michelle", "dicks", "michd@gmail.com", "passme", {'great_song': 'doves_cry'})
-    michelle.set_updated_user(**{'first_name':'Michie', 'email':'michelle@gmail.com'})
-    >>> michelle.set_updated_user(**{'password': 'frenchie'})
-    'updated user info.'
-    >>> michelle.password
-    'frenchie'
-    Bubba = User("Bubba", "Wallace", "bubs@gmail.com", "drive it fast", {'favorite number': 43})
-    >>> Bubba.hint
-    {'favorite number': 43}
-    >>> Annette = Friend("Annette", "Lum", "annli@gmail.com", 4, 18, 1970)
-    >>> repr(Annette)
-    "'Name: Annette Lum, birthday: April 18, 1970, days to birthday: 182'"
-    >>> shoes = Gift('Cole Haan', 'https://www.colehaan.com', 'She likes ballet, these slippers are perfect')
-    >>> hat = Gift('Dodgers', 'https://www.dodgers.com', 'She and her husband like the Dodgers')
-    >>> Annette.set_new_gift_on_giftlist(shoes)
-    'added new gift to giftlist'
-    >>> Annette.set_new_gift_on_giftlist(hat)
-    'added new gift to giftlist'
-    >>> Peter = Friend("Peter", "Express", "peter@gmail.com", 6, 26, 1985)
-    >>> shoes = Gift('Nike', 'https://www.nike.com', 'He likes to workout')
-    >>> Peter.set_new_gift_on_giftlist(shoes)
-    'added new gift to giftlist'
-    >>> hat = Gift('Patroits', 'https://www.patriots.com', 'He loves new England')
-    >>> Peter.set_new_gift_on_giftlist(hat)
-    'added new gift to giftlist'
-    >>> Annette.print_gift_lst()
-    1 'Idea: Cole Haan, URL: https://www.colehaan.com, Notes: She likes ballet, these slippers are perfect'
-    2 'Idea: Dodgers, URL: https://www.dodgers.com, Notes: She and her husband like the Dodgers'
-    >>> Peter.print_gift_lst()
-    1 'Idea: Nike, URL: https://www.nike.com, Notes: He likes to workout'
-    2 'Idea: Patroits, URL: https://www.patriots.com, Notes: He loves new England'
-    >>> michelle.set_new_friend(Annette)
-    'Added new friend to list'
-    >>> michelle.set_new_friend(Alice)
-    'Added new friend to list'
-    >>> Bubba.set_new_friend(Peter)
-    'Added new friend to list'
-    >>> michelle.prnt_friend_lst()
-    You have 2 friend(s). Here is a list:
-    1 'Name: Annette Lum, birthday: April 18, 1970, days to birthday: 182'
-    2 'Name: Alice Meng, birthday: March 31, 1968, days to birthday: 200'
-    >>> Bubba.prnt_friend_lst()
-    You have 1 friend(s). Here is a list:
-    # CAREFUL - when spelling keys it will create a new k:v pair if you misspell the key
-    # need to make sure to use upper/lower, etc when setting and retrieving name
-    """

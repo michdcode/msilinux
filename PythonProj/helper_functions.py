@@ -2,11 +2,7 @@ import finprep as fp
 import string_utils as su
 
 
-"""
-************************************************
- class related functions
-************************************************
-"""
+# class helper functions
 
 
 def add_new_user(name, email):
@@ -36,7 +32,7 @@ def add_new_friend():
 
 def add_friend(friend, birthday):
     """Clean data and create Friend instance."""
-    first, last = friend.title().split(" ")
+    first, last = friend.title().split()
     month, day, year = birthday.split("/")
     CurrentFriend = fp.Friend(first, last, int(month), int(day), int(year))
     print("Your new friend has been added.")
@@ -62,13 +58,7 @@ def add_new_gift():
             NewGift = fp.Gift(gift_name, gift_URL, gift_note)
             return NewGift
 
-  
-
-"""
-************************************************
-validation functions
-************************************************
-"""
+# validation helper functions
 
 
 def name_validation(name_to_check):
@@ -81,19 +71,14 @@ def name_validation(name_to_check):
         raise ValueError("Enter two names with a space in between")
 
 
-"""
-************************************************
-menu functions
-************************************************
-"""
+# menu helper functions
 
 
 def display_main_menu():
     """Shows main options for program."""
     options = ["Add a new friend", "Add a new gift idea",
                "See list of friends", "Get list of gifts for a friend",
-               "Update name or email", "Update friend information",
-               "Update gift information", "Exit"]
+               "Update name or email", "Exit"]
     print("Please choose one of these options: ")
     for count, option in enumerate(options, 1):
         print(count, option)
@@ -106,7 +91,7 @@ def get_user_option():
             pick = int(input("Enter number corresponding to your"
                              " choice: "))
             if (pick > 8) or (pick < 1):
-                raise ValueError("Choices are between 1 and 8.")
+                raise ValueError("Choices are between 1 and 6.")
         except ValueError as error:
             print(error)
         else:

@@ -1,6 +1,7 @@
 # Standard Library Imports 
 import sys
 import string_utils as su
+from datetime import date
 
 # Local imports
 from helper_functions import *
@@ -51,8 +52,9 @@ while choice is not 8:
             if len(user_friends) < 1:
                 print("Enter a friend before adding a gift.")
             NewGift = add_new_gift()
-            find_friend = input("Enter the first and last name with a space in "
-                                "between of friend you have a gift idea for: ")
+            find_friend = input("Enter the first and last name with a space in"
+                                " between of friend you have a gift idea for: "
+                                )
             name_validation(find_friend)
             find_friend = find_friend.title()
             friend_first, friend_last = find_friend.split()
@@ -89,12 +91,12 @@ while choice is not 8:
         find_friend = find_friend.title()
         friend_first, friend_last = find_friend.split()
         try:
-            for friend in user_friends:
-                if (friend_first == friend.first_name) and\
-                   (friend_last == friend.last_name):
+            for Friend in user_friends:
+                if (Friend_first == friend.first_name) and\
+                   (Friend_last == friend.last_name):
                     print("The gift list for {} {} is:".format
-                          (friend.first_name, friend.last_name))
-                    if len(friend._gift_lst) > 1: 
+                          (Friend.first_name, Friend.last_name))
+                    if len(friend._gift_lst) > 1:
                         for gift in friend._gift_lst:
                             print(gift)
                     else:
@@ -102,8 +104,8 @@ while choice is not 8:
         except KeyError as error:
             print(error)
         else:
-            "Could not find friend on your list, please try again."
-    # Update name or email
+            print("Could not find friend on your list, please try again.")
+    # Update user name or email
     elif option == 5:
         try:
             print("If you don't need to update your name just press enter.")
@@ -136,60 +138,11 @@ while choice is not 8:
                     end_users.remove(OldUser)
                     end_users.append(CurrentUser)
             print("Information updated!")
-
-    #Update friend information
-    elif option == 6:
-        try:
-            print("If you don't need to update a field, just leave it blank.")
-            friend = (str(input("Enter your friend's first and last name"
-                                " seperated by a space, omit prefixes"
-                                " and suffixes: ")))
-            birthday = input("Enter birthday in this format with no leading"
-                             " zeros MM/DD/YYYY: ")
-            if friend:
-                name_validation(name)
-            if (email) and (not su.is_email(email)):  # check that it is email
-                raise ValueError("You did not enter an email address.")
-            OldFriend = friend
-        except ValueError as error:
-            print(error)
-        else:
-            
-            
-            
-            if (name) and (birthday):
-                first, last = name.title().split()
-                
-                CurrentUser.set_updated_user(**{'first_name': first,
-                                                'last_name': last,
-                                                'email': email})
-            elif name:
-                first, last = name.title().split()
-                CurrentUser.set_updated_user(**{'first_name': first,
-                                                'last_name': last})
-            elif email:
-                CurrentUser.set_updated_user(**{'email': email})
-            for user in end_users:
-                if user == OldUser:
-                    end_users.remove(OldUser)
-                    end_users.append(CurrentUser)
-            print("Information updated!")
-        
-        
-        
-    # Update gift information"
-    elif option == 7:
-        update_gift_info()
     # Exit
-    elif option == 8:
-        choice = 8
+    elif option == 6:
+        choice = 6
 
-if choice == 9:
+if choice == 6:
     print("Thank you for using Birthday Buddy.")
     print("Exiting.")
     sys.exit()
-
-
-
-
-
