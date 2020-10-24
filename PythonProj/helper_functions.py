@@ -1,4 +1,4 @@
-import finprep as fp
+import my_classes as mc
 import string_utils as su
 
 
@@ -8,7 +8,7 @@ import string_utils as su
 def add_new_user(name, email):
     """Clean data and create User instance."""
     first, last = name.title().split(" ")
-    NewUser = fp.User(first, last, email)
+    NewUser = mc.User(first, last, email)
     print("Welcome, here is the information on file: ")
     print(repr(NewUser))
     return NewUser
@@ -34,7 +34,7 @@ def add_friend(friend, birthday):
     """Clean data and create Friend instance."""
     first, last = friend.title().split()
     month, day, year = birthday.split("/")
-    CurrentFriend = fp.Friend(first, last, int(month), int(day), int(year))
+    CurrentFriend = mc.Friend(first, last, int(month), int(day), int(year))
     print("Your new friend has been added.")
     print(repr(CurrentFriend))
     return CurrentFriend
@@ -55,7 +55,7 @@ def add_new_gift():
         except ValueError as error:
             print(error)
         else:
-            NewGift = fp.Gift(gift_name, gift_URL, gift_note)
+            NewGift = mc.Gift(gift_name, gift_URL, gift_note)
             return NewGift
 
 # validation helper functions

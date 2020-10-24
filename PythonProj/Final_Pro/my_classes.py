@@ -21,7 +21,7 @@ class Person(object):
         self.new_UUID = next(self._UUID_counter)
         return self.new_UUID
 
-    def __get_UUID_lst(self):
+    def _get_UUID_lst(self):
         """ This will return a list of all UUIDS"""
         return self._UUID_lst
 
@@ -34,9 +34,6 @@ class User(Person):
 
         Person.__init__(self, first, last)
         self.email = email
-        # # in real life would not store password as plain text
-        # self.__password = pwd
-        # self.hint = hint
         self._friend_lst = []
 
     def set_updated_user(self, **kwargs):
