@@ -1,5 +1,8 @@
-import my_classes as mc
+# Standard Library Imports
 import string_utils as su
+
+# Local imports
+import MyClasses as mc
 
 
 # class helper functions
@@ -63,7 +66,7 @@ def add_new_gift():
 
 def name_validation(name_to_check):
     """Make sure name is not empty, two words, not numbers."""
-    if not su.is_full_string(name_to_check): # at least 1 non-space
+    if not su.is_full_string(name_to_check):  # at least 1 non-space
         raise ValueError("Enter a name.")
     elif su.is_number(name_to_check):  # not just numbers
         raise ValueError("Enter a name, not a number.")
@@ -90,7 +93,7 @@ def get_user_option():
         try:
             pick = int(input("Enter number corresponding to your"
                              " choice: "))
-            if (pick > 8) or (pick < 1):
+            if (pick > 6) or (pick < 1):
                 raise ValueError("Choices are between 1 and 6.")
         except ValueError as error:
             print(error)

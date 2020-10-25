@@ -148,4 +148,3 @@ class Gift():
     def __repr__(self):
         return repr('Idea: ' + self.idea + ', URL: ' + self.URL +
                     ', Notes: ' + self.notes)
-
